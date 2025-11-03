@@ -124,8 +124,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
 */
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lab7/translations/locale_keys.g.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -135,10 +137,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // Controllers and variables
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final TextEditingController _lifeStoryController = TextEditingController();
   bool _hidePass = true;
 
@@ -147,6 +151,8 @@ class _RegisterPageState extends State<RegisterPage> {
     _nameController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
     _lifeStoryController.dispose();
     super.dispose();
   }
@@ -162,21 +168,21 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registered Form'),
+        title: Text(LocaleKeys.registeredForm.tr()),
         centerTitle: true,
       ),
       body: Form(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
-            TextField(
+            TextFormField(
               controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Full Name',
-                hintText: 'WHAT DO PPL CALL YOU?',
-                prefixIcon: Icon(Icons.person),
-                suffixIcon: Icon(Icons.delete_outline, color: Colors.red),
-                enabledBorder: OutlineInputBorder(
+              decoration: InputDecoration(
+                labelText: LocaleKeys.fullName.tr(),
+                hintText: LocaleKeys.whatDoPplCallYou.tr(),
+                prefixIcon: const Icon(Icons.person),
+                suffixIcon: const Icon(Icons.delete_outline, color: Colors.red),
+                enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   borderSide: BorderSide(color: Colors.black, width: 2.0),
                 ),
@@ -187,28 +193,41 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             const SizedBox(height: 10),
-            TextField(
-              controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              decoration: const InputDecoration(
-                labelText: 'Phone Number',
-                hintText: 'Where can we reach you?',
-                helperText: 'Phone format: (xxx)xxx-xxx',
-                prefixIcon: Icon(Icons.call),
-                suffixIcon: Icon(Icons.delete_outline, color: Colors.red),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  borderSide: BorderSide(color: Colors.black, width: 2.0),
+            TextFormField(
+                controller: _phoneController,
+                keyboardType: TextInputType.phone,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: InputDecoration(
+                  labelText: LocaleKeys.phoneNumber.tr(),
+                  hintText: LocaleKeys.whereCanWeReachYou.tr(),
+                  helperText: 'Phone format: (xxx)xxx-xxx',
+                  prefixIcon: const Icon(Icons.call),
+                  suffixIcon:
+                      const Icon(Icons.delete_outline, color: Colors.red),
+                  enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    borderSide: BorderSide(color: Colors.black, width: 2.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                ),
-              ),
-            ),
+
+                // not sure if htis is correct
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email field cannot be empty.';
+                  }
+
+                  // This single function checks the full email format
+                  // if (!EmailValidator.validate(value)) {
+                  // return 'Enter a valid email address';
+                  // }
+                  return null;
+                }),
             const SizedBox(height: 10),
-            TextField(
+            TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
@@ -217,12 +236,12 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             const SizedBox(height: 10),
-            TextField(
+            TextFormField(
               controller: _lifeStoryController,
               maxLines: 3,
               decoration: const InputDecoration(
                 labelText: 'Life Story',
-                helperText: 'Keep it short, this is just a demo',
+                helperText: 'Keep it short',
               ),
             ),
             const SizedBox(height: 10),
@@ -244,6 +263,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            TextFormField(
+              obscureText: _hidePass,
+              maxLength: 8,
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+                hintText: 'Enter your password again',
+                icon: const Icon(Icons.border_color),
+                suffixIcon: IconButton(
+                  icon:
+                      Icon(_hidePass ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _hidePass = !_hidePass;
+                    });
+                  },
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _submitForm,
@@ -254,6 +292,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 'Submit Form',
                 style: TextStyle(color: Colors.white),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await context.setLocale(const Locale('ru'));
+              },
+              child: const Text("RU"),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await context.setLocale(const Locale('kk'));
+              },
+              child: const Text("KZ"),
             ),
           ],
         ),
