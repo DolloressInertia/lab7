@@ -251,7 +251,7 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: InputDecoration(
                 labelText: LocaleKeys.password.tr(),
                 hintText: LocaleKeys.enterYourPasswordAgain.tr(),
-                icon: const Icon(Icons.security),
+                icon: Icon(Icons.security),
                 suffixIcon: IconButton(
                   icon:
                       Icon(_hidePass ? Icons.visibility : Icons.visibility_off),
