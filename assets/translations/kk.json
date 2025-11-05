@@ -4,5 +4,12 @@
     "fullName": "толық аты-жөні",
     "whatDoPplCallYou": "Адамдар сізді қалай атайды?",
     "phoneNumber": "Телефон нөмірі",
-    "whereCanWeReachYou": "Сізге қайдан жетуге болады?"
+    "whereCanWeReachYou": "Сізге қайдан жетуге болады?",
+    "emailFieldCannotBeEmpty": "Электрондық пошта өрісі бос болмауы керек.",
+    "emailAddress": "Электрондық пошта",
+    "lifeStory": "Өмірбаяны",
+    "keepItShort": "Қысқаша жазыңыз",
+    "password": "Құпия сөз",
+    "enterYourPasswordConfirmPassword": "Құпия сөзіңізді енгізіңіз, Құпия сөзді растаңыз",
+    "enterYourPasswordAgain": "Құпия сөзді қайта енгізіңіз"
 }

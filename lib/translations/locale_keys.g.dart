@@ -9,5 +9,12 @@ abstract class  LocaleKeys {
   static const whatDoPplCallYou = 'whatDoPplCallYou';
   static const phoneNumber = 'phoneNumber';
   static const whereCanWeReachYou = 'whereCanWeReachYou';
+  static const emailFieldCannotBeEmpty = 'emailFieldCannotBeEmpty';
+  static const emailAddress = 'emailAddress';
+  static const lifeStory = 'lifeStory';
+  static const keepItShort = 'keepItShort';
+  static const password = 'password';
+  static const enterYourPasswordConfirmPassword = 'enterYourPasswordConfirmPassword';
+  static const enterYourPasswordAgain = 'enterYourPasswordAgain';
 
 }

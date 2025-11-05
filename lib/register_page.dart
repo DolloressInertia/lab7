@@ -217,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 // not sure if htis is correct
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Email field cannot be empty.';
+                    return LocaleKeys.emailFieldCannotBeEmpty.tr();
                   }
 
                   // This single function checks the full email format
@@ -230,18 +230,18 @@ class _RegisterPageState extends State<RegisterPage> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                labelText: 'Email Address',
-                prefixIcon: Icon(Icons.email),
+              decoration: InputDecoration(
+                labelText: LocaleKeys.emailAddress.tr(),
+                prefixIcon: const Icon(Icons.email),
               ),
             ),
             const SizedBox(height: 10),
             TextFormField(
               controller: _lifeStoryController,
               maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: 'Life Story',
-                helperText: 'Keep it short',
+              decoration: InputDecoration(
+                labelText: LocaleKeys.lifeStory.tr(),
+                helperText: LocaleKeys.keepItShort.tr(),
               ),
             ),
             const SizedBox(height: 10),
@@ -249,8 +249,8 @@ class _RegisterPageState extends State<RegisterPage> {
               obscureText: _hidePass,
               maxLength: 8,
               decoration: InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
+                labelText: LocaleKeys.password.tr(),
+                hintText: LocaleKeys.enterYourPasswordAgain.tr(),
                 icon: const Icon(Icons.security),
                 suffixIcon: IconButton(
                   icon:
@@ -268,8 +268,8 @@ class _RegisterPageState extends State<RegisterPage> {
               obscureText: _hidePass,
               maxLength: 8,
               decoration: InputDecoration(
-                labelText: 'Confirm Password',
-                hintText: 'Enter your password again',
+                labelText: LocaleKeys.enterYourPasswordConfirmPassword.tr(),
+                hintText: LocaleKeys.enterYourPasswordAgain.tr(),
                 icon: const Icon(Icons.border_color),
                 suffixIcon: IconButton(
                   icon:

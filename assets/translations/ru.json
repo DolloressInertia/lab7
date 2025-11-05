@@ -4,5 +4,12 @@
     "fullName": "полное имя",
     "whatDoPplCallYou": "Как к вам обращаются люди?",
     "phoneNumber": "Номре Телефона",
-    "whereCanWeReachYou": "где вам сожно найти?"
+    "whereCanWeReachYou": "где вам сожно найти?",
+    "emailFieldCannotBeEmpty": "Поле электронной почты не может быть пустым.",
+    "emailAddress": "Электронная почта",
+    "lifeStory": "История жизни",
+    "keepItShort": "Будьте кратки",
+    "password": "Пароль",
+    "enterYourPasswordConfirmPassword": "Введите пароль, Подтвердите пароль",
+    "enterYourPasswordAgain": "Введите пароль еще раз"
 }
