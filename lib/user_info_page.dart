@@ -56,7 +56,6 @@ class UserInfoPage extends StatelessWidget {
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
-                  // Later you can add navigation to MainAppPage
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(

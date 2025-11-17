@@ -242,10 +242,8 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  // 2. New function to dispatch the BLoC event
   void _submitForm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      // Dispatch the RegisterEvent to the AuthBloc
       context.read<AuthBloc>().add(
             RegisterEvent(
               email: _emailController.text,
@@ -257,15 +255,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // 3. BlocListener wraps the whole Scaffold for side effects
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          // Navigate to the UserInfoPage (defined as '/second' in main.dart)
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           Navigator.of(context).pushReplacementNamed('/second');
         } else if (state is AuthFailure) {
-          // Show error SnackBar on failure
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -281,13 +276,10 @@ class _RegisterPageState extends State<RegisterPage> {
           centerTitle: true,
         ),
         body: Form(
-          key: _formKey, // Attach the GlobalKey
+          key: _formKey,
           child: ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
-              // ... Your other TextFormFields (Name, Phone, Email, Life Story) ...
-
-              // Name Field
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -427,7 +419,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 20),
 
-              // 4. BlocBuilder wraps the button to manage the loading state
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
                   final bool isLoading = state is AuthLoading;
