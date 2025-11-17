@@ -227,6 +227,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool _hidePass = true;
 
+  final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+  final RegExp phoneRegex = RegExp(r'^\d{10}$'); // 10 digits only
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -327,10 +331,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     borderSide: BorderSide(color: Colors.blue, width: 2.0),
                   ),
                 ),
-                // Corrected validation (assuming it's still for the phone number)
-                validator: (value) => value!.isEmpty
-                    ? LocaleKeys.emailFieldCannotBeEmpty.tr()
-                    : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Phone number cannot be empty';
+                  }
+                  if (!phoneRegex.hasMatch(value)) {
+                    return 'Phone must be 10 digits (example: 7771234567)';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 10),
 
@@ -342,8 +351,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   labelText: LocaleKeys.emailAddress.tr(),
                   prefixIcon: const Icon(Icons.email),
                 ),
-                validator: (value) =>
-                    value!.isEmpty ? 'Email cannot be empty' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email cannot be empty';
+                  }
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Enter a valid email address';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 10),
 
